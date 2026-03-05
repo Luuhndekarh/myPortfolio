@@ -31,8 +31,23 @@ if (contactForm) {
         }
 
         // Success message
-        alert("Message sent successfully!");
-        contactForm.reset(); // Clear the form
+        // Initialize EmailJS (do this once — move to top of file if preferred)
+emailjs.init("apep9afQB86Z2W52p"); // 🔁 Replace with your Public Key
+
+// Send the email
+emailjs.send("service_2f2nlfc", "template_kqj1ux4", {
+    name: name,
+    email: email,
+    message: message
+})
+.then(function() {
+    alert("Message sent successfully!");
+    contactForm.reset();
+})
+.catch(function(error) {
+    alert("Something went wrong. Please try again.");
+    console.error("EmailJS error:", error);
+});
     });
 }
 
@@ -40,3 +55,16 @@ const form = document.getElementById('contactForm');
 if (form) {
     form.classList.add('slide-in'); // triggers the animation on page load
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
